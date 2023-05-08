@@ -1,4 +1,5 @@
 import * as logger from '../../services/logger';
+import * as userManager from '../../services/user-manager';
 
 export async function signUp(signUpData) {
     const url = process.env.REACT_APP_BE_HOST + '/api/v1/sign-up';
@@ -62,6 +63,9 @@ export async function login(loginData) {
         if (!userId || !token) {
             logger.log('Authentication failed');
         }
+
+        userManager.setUserToken(token);
+        userManager.setUserId(userId);
 
         return {
             userId: userId,

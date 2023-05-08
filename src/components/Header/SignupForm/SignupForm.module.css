@@ -1,0 +1,17 @@
+.signup-form {
+    top: 15vh;
+    background-color: white;
+    color: black;
+}
+
+.signup-form h2 {
+    text-align: left;
+    background-color: #034d67;
+    color: white;
+    margin: 0;
+    padding: 1rem;
+}
+
+.form-input {
+    text-align: left;
+}

@@ -1,6 +1,7 @@
 import * as logger from '../../services/logger';
+import * as userDataManager from '../../services/user-manager';
 
-export async function getUsers(requestData, user) {
+export async function getUsers(requestData) {
     const url = process.env.REACT_APP_BE_HOST + '/api/v1/users';
 
     try {
@@ -8,7 +9,7 @@ export async function getUsers(requestData, user) {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + user.token
+                'Authorization': 'Bearer ' + userDataManager.getUserToken()
             }
         });
 
@@ -24,7 +25,7 @@ export async function getUsers(requestData, user) {
     }
 }
 
-export async function getUserDetails(requestData, user) {
+export async function getUserDetails(requestData) {
     const url = process.env.REACT_APP_BE_HOST + '/api/v1/users/' + requestData.userId;
 
     try {
@@ -32,7 +33,7 @@ export async function getUserDetails(requestData, user) {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + user.token
+                'Authorization': 'Bearer ' + userDataManager.getUserToken()
             }
         });
 
@@ -48,7 +49,7 @@ export async function getUserDetails(requestData, user) {
     }
 }
 
-export async function updateUser(requestData, user) {
+export async function updateUser(requestData) {
     const url = process.env.REACT_APP_BE_HOST + '/api/v1/users/' + requestData.userId;
     const body = {
         name: requestData.name,
@@ -63,7 +64,7 @@ export async function updateUser(requestData, user) {
             body: JSON.stringify(body),
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + user.token
+                'Authorization': 'Bearer ' + userDataManager.getUserToken()
             }
         });
 
@@ -79,7 +80,7 @@ export async function updateUser(requestData, user) {
     }
 }
 
-export async function deleteUser() {
+export async function deleteUser(requestData) {
     const url = process.env.REACT_APP_BE_HOST + '/api/v1/users/' + requestData.userId;
 
     try {
@@ -87,7 +88,7 @@ export async function deleteUser() {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + user.token
+                'Authorization': 'Bearer ' + userDataManager.getUserToken()
             }
         });
 

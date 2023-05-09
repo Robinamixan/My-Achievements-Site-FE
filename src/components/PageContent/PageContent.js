@@ -9,7 +9,9 @@ function PageContent() {
     const [users, setUsers] = React.useState([]);
 
     React.useEffect(() => {
-        const pagination = {};
+        const pagination = {
+            page: 1
+        };
 
         if (!userManager.isAuthenticated()) {
             return;

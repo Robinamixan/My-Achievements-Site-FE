@@ -10,7 +10,8 @@ module.exports = [
     },
     rules: {
       'semi': ['error', 'always'],
-      'quotes': ['error', 'single'],
+      'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
+      'no-unused-vars': 'error',
       'no-multiple-empty-lines': ['error', {'max': 1}]
     }
   }

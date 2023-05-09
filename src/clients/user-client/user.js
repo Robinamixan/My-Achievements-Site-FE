@@ -2,7 +2,8 @@ import * as logger from '../../services/logger';
 import * as userDataManager from '../../services/user-manager';
 
 export async function getUsers(requestData) {
-    const url = process.env.REACT_APP_BE_HOST + '/api/v1/users';
+    const page = requestData.page || 1;
+    const url = `${process.env.REACT_APP_BE_HOST}/api/v1/users?page=${page}`;
 
     try {
         const response = await fetch(url, {

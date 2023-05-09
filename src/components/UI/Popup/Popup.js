@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Popup.css';
+import styleClasses from './Popup.module.css';
 
 Popup.propTypes = {
     children: PropTypes.node,
@@ -11,11 +11,11 @@ Popup.propTypes = {
 
 function Popup(props) {
     const {className, onBackdropClick, children, ...childProps} = props;
-    const classes = className + ' popup-box';
+    const classes = className + ' ' + styleClasses['popup-box'];
 
     return (
         <React.Fragment>
-            <div className={'popup-backdrop'} onClick={onBackdropClick}></div>
+            <div className={styleClasses['popup-backdrop']} onClick={onBackdropClick}></div>
             <div {...childProps} className={classes}>{children}</div>
         </React.Fragment>
     );

@@ -8,8 +8,6 @@ import PageContent from './components/PageContent/PageContent';
 import Footer from './components/Footer/Footer';
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-
     return (
         <div className={'app'}>
             <HeaderPanel/>

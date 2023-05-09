@@ -5,36 +5,28 @@ import * as authenticationClient from '../../../clients/user-client/authenticati
 
 import Popup from '../../UI/Popup/Popup';
 import Button from '../../UI/Button/Button';
-import styleClasses from './SignupForm.module.css';
+import styleClasses from './LoginForm.module.css';
 
-SignupForm.propTypes = {
+LoginForm.propTypes = {
     isVisible: PropTypes.bool,
     onClose: PropTypes.func
 };
 
-function SignupForm(props) {
+function LoginForm(props) {
     const initialState = {
-        username: '',
         email: '',
         password: '',
-        confirmPassword: '',
     };
     const [formValues, setFormValues] = React.useState(initialState);
 
     const inputChangeHandler = (event) => {
         let fieldName;
         switch (event.target.id) {
-            case 'signup-username':
-                fieldName = 'username';
-                break;
-            case 'signup-email':
+            case 'login-email':
                 fieldName = 'email';
                 break;
-            case 'signup-password':
+            case 'login-password':
                 fieldName = 'password';
-                break;
-            case 'signup-confirm-password':
-                fieldName = 'confirmPassword';
                 break;
             default:
                 fieldName = 'undefined';
@@ -46,14 +38,13 @@ function SignupForm(props) {
         });
     };
 
-    const signupHandler = async (event) => {
+    const loginHandler = async (event) => {
         event.preventDefault();
 
         try {
-            await authenticationClient.signUp({
+            await authenticationClient.login({
                 email: formValues.email,
-                password: formValues.password,
-                name: formValues.username
+                password: formValues.password
             });
         } catch (error) {
             return;
@@ -68,21 +59,13 @@ function SignupForm(props) {
     }
 
     return (
-        <Popup className={styleClasses['signup-form']} onBackdropClick={props.onClose}>
-            <h2>Signup</h2>
-            <form onSubmit={signupHandler}>
-                <div className={styleClasses['form-input']}>
-                    <label form={'signup-username'}>Username</label>
-                    <input
-                        id={'signup-username'}
-                        value={formValues.username}
-                        onChange={inputChangeHandler}
-                    />
-                </div>
+        <Popup className={styleClasses['login-form']} onBackdropClick={props.onClose}>
+            <h2>Login</h2>
+            <form onSubmit={loginHandler}>
                 <div className={styleClasses['form-input']}>
                     <label>Email</label>
                     <input
-                        id={'signup-email'}
+                        id={'login-email'}
                         type={'email'}
                         value={formValues.email}
                         onChange={inputChangeHandler}
@@ -91,25 +74,16 @@ function SignupForm(props) {
                 <div className={styleClasses['form-input']}>
                     <label>Password</label>
                     <input
-                        id={'signup-password'}
+                        id={'login-password'}
                         type={'password'}
                         value={formValues.password}
                         onChange={inputChangeHandler}
                     />
                 </div>
-                <div className={styleClasses['form-input']}>
-                    <label>Confirm Password</label>
-                    <input
-                        id={'signup-confirm-password'}
-                        type={'password'}
-                        value={formValues.confirmPassword}
-                        onChange={inputChangeHandler}
-                    />
-                </div>
-                <Button type={'submit'}>Signup</Button>
+                <Button type={'submit'}>Login</Button>
             </form>
         </Popup>
     );
 }
 
-export default SignupForm;
+export default LoginForm;

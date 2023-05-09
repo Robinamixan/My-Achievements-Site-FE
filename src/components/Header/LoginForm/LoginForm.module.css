@@ -1,10 +1,10 @@
-.signup-form {
+.login-form {
     top: 15vh;
     background-color: white;
     color: black;
 }
 
-.signup-form h2 {
+.login-form h2 {
     text-align: left;
     background-color: #034d67;
     color: white;
@@ -12,7 +12,7 @@
     padding: 1rem;
 }
 
-.signup-form form{
+.login-form form{
     padding: 1rem;
 }
 

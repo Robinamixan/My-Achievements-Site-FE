@@ -3,11 +3,13 @@ import React from 'react';
 import './App.css';
 
 import HeaderPanel from './components/Header/HeaderPanel/HeaderPanel';
-import NavigationPanel from './components/NavigationPanel/NavigationPanel';
+import NavigationPanel from './components/LeftPanel/NavigationPanel';
 import PageContent from './components/PageContent/PageContent';
 import Footer from './components/Footer/Footer';
 
 function App() {
+    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
     return (
         <div className={'app'}>
             <HeaderPanel/>

@@ -4,21 +4,21 @@
     text-align: center;
 }
 
-.user-panel__item {
+.item {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0.5rem;
 }
 
-.user-panel__item .panel-button{
+.item .button{
     padding: 0.5rem 1rem;
     background-color: #4fa0ce;
     border-color: #4fa0ce;
 }
 
-.user-panel__item .panel-button:hover,
-.user-panel__item .panel-button:active {
+.item .button:hover,
+.item .button:active {
     background: #5bbbf1;
     border-color: #5bbbf1;
 }

@@ -6,6 +6,7 @@ import * as authenticationClient from '../../../clients/user-client/authenticati
 import Popup from '../../UI/Popup/Popup';
 import Button from '../../UI/Button/Button';
 import styleClasses from './LoginForm.module.css';
+import AuthContext from '../../../store/auth-context';
 
 LoginForm.propTypes = {
     isVisible: PropTypes.bool,
@@ -13,6 +14,8 @@ LoginForm.propTypes = {
 };
 
 function LoginForm(props) {
+    const context = React.useContext(AuthContext);
+
     const initialState = {
         email: '',
         password: '',
@@ -42,10 +45,12 @@ function LoginForm(props) {
         event.preventDefault();
 
         try {
-            await authenticationClient.login({
+            const response = await authenticationClient.login({
                 email: formValues.email,
                 password: formValues.password
             });
+
+            context.onLogin(response.userId, response.token);
         } catch (error) {
             return;
         }

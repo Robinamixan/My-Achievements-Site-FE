@@ -1,32 +1,34 @@
 import React from 'react';
 
 import * as userClient from '../../clients/user-client/user';
-import * as userManager from '../../services/user-manager';
+import * as logger from '../../services/logger';
 
-import './PageContent.css';
+import AuthContext from '../../store/auth-context';
 
-function PageContent() {
-    const [users, setUsers] = React.useState([]);
+function UsersList() {
+    const context = React.useContext(AuthContext);
+    const isAuthorized = context.isAuthorized;
+
+    const initialUsersState = [];
+    const [users, setUsers] = React.useState(initialUsersState);
 
     React.useEffect(() => {
-        const pagination = {
-            page: 1
-        };
-
-        if (!userManager.isAuthenticated()) {
+        if (!isAuthorized) {
+            setUsers(initialUsersState);
             return;
         }
 
+        const pagination = {page: 1};
         userClient.getUsers(pagination)
             .then((userList) => {
                 setUsers(userList.items);
             })
-            .catch((error) => console.log(error));
-    }, []);
+            .catch((error) => logger.log(error));
+    }, [isAuthorized]);
 
     return (
-        <div className={'content'}>
-            <div>Users list</div>
+        <>
+            <h2>Users list</h2>
             <div>
                 <ul>
                     {
@@ -38,8 +40,8 @@ function PageContent() {
                     }
                 </ul>
             </div>
-        </div>
+        </>
     );
 }
 
-export default PageContent;
+export default UsersList;

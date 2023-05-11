@@ -1,5 +1,5 @@
 export function getUserToken() {
-    return localStorage.getItem('user-token');
+    return localStorage.getItem('user-token') || '';
 }
 
 export function setUserToken(token) {
@@ -11,13 +11,13 @@ export function removeUserToken() {
 }
 
 export function getUserId() {
-    return localStorage.getItem('user-id');
+    return localStorage.getItem('user-id') || '';
 }
 
 export function setUserId(userId) {
     localStorage.setItem('user-id', userId);
 }
 
-export function isAuthenticated() {
+export function isAuthorized() {
     return localStorage.getItem('user-token') !== null;
 }

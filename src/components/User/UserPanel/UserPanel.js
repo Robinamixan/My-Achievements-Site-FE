@@ -1,27 +1,19 @@
 import React from 'react';
 
-import * as userManager from '../../../services/user-manager';
-
-import './UserPanel.css';
+import styles from './UserPanel.module.css';
 import SignupForm from '../SignupForm/SignupForm';
 import LoginForm from '../LoginForm/LoginForm';
 import Button from '../../UI/Button/Button';
+import AuthContext from '../../../store/auth-context';
 
 function UserPanel() {
+    const context = React.useContext(AuthContext);
+
     const [isSignupFormVisible, setSignupFormVisibility] = React.useState(false);
     const [isLoginFormVisible, setLoginFormVisibility] = React.useState(false);
-    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-
-    React.useEffect(() => {
-        const userToken = userManager.getUserToken();
-        if (userToken) {
-            setIsAuthenticated(true);
-        }
-    }, [isLoginFormVisible, isSignupFormVisible]);
 
     const userLogoutHandler = () => {
-        userManager.removeUserToken();
-        setIsAuthenticated(false);
+        context.onLogout();
     };
 
     const showSignupFormHandler = () => {
@@ -40,23 +32,23 @@ function UserPanel() {
         setLoginFormVisibility(false);
     };
 
-    if (isAuthenticated) {
+    if (context.isAuthorized) {
         return (
-            <div className={'user-panel'}>
-                <div className={'user-panel__item'}>
-                    <Button className={'panel-button'} onClick={userLogoutHandler}>Logout</Button>
+            <div className={styles['user-panel']}>
+                <div className={styles.item}>
+                    <Button className={styles.button} onClick={userLogoutHandler}>Logout</Button>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className={'user-panel'}>
-            <div className={'user-panel__item'}>
-                <Button className={'panel-button'} onClick={showLoginFormHandler}>Login</Button>
+        <div className={styles['user-panel']}>
+            <div className={styles.item}>
+                <Button className={styles.button} onClick={showLoginFormHandler}>Login</Button>
             </div>
-            <div className={'user-panel__item'}>
-                <Button className={'panel-button'} onClick={showSignupFormHandler}>Sign-up</Button>
+            <div className={styles.item}>
+                <Button className={styles.button} onClick={showSignupFormHandler}>Sign-up</Button>
             </div>
             <SignupForm isVisible={isSignupFormVisible} onClose={hideSignupFormHandler}/>
             <LoginForm isVisible={isLoginFormVisible} onClose={hideLoginFormHandler}/>

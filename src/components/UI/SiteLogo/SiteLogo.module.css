@@ -4,12 +4,12 @@
     text-align: center;
 }
 
-.site-logo__image {
+.wrapper {
     width: 5rem;
     height: 5rem;
 }
 
-.site-logo__text {
+.title {
     display: flex;
     justify-content: center;
     align-items: center;

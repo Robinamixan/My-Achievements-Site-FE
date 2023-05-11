@@ -8,24 +8,28 @@ import AuthContext from '../../store/auth-context';
 function UserProfile() {
     const context = React.useContext(AuthContext);
     const isAuthorized = context.isAuthorized;
+    const userId = context.userId;
 
-    const initialState = {
+    const [userState, setUserState] = React.useState({
         username: '',
         email: '',
         roles: [],
         active: null,
-    };
-
-    const [userState, setUserState] = React.useState(initialState);
+    });
 
     React.useEffect(() => {
         if (!isAuthorized) {
-            setUserState(initialState);
+            setUserState({
+                username: '',
+                email: '',
+                roles: [],
+                active: null,
+            });
             return;
         }
 
         const requestData = {
-            userId: context.userId
+            userId: userId
         };
 
         userClient.getUserDetails(requestData)
@@ -38,7 +42,7 @@ function UserProfile() {
                 });
             })
             .catch((error) => logger.log(error));
-    }, [isAuthorized]);
+    }, [isAuthorized, userId]);
 
     return (
         <>

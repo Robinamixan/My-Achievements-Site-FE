@@ -9,12 +9,11 @@ function UsersList() {
     const context = React.useContext(AuthContext);
     const isAuthorized = context.isAuthorized;
 
-    const initialUsersState = [];
-    const [users, setUsers] = React.useState(initialUsersState);
+    const [users, setUsers] = React.useState([]);
 
     React.useEffect(() => {
         if (!isAuthorized) {
-            setUsers(initialUsersState);
+            setUsers([]);
             return;
         }
 

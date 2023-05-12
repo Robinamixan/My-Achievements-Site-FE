@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 
 import styles from './UserPanel.module.css';
 import SignupForm from '../SignupForm/SignupForm';
@@ -7,6 +8,7 @@ import Button from '../../UI/Button/Button';
 import AuthContext from '../../../store/auth-context';
 
 function UserPanel() {
+    const navigate = useNavigate();
     const context = React.useContext(AuthContext);
 
     const [isSignupFormVisible, setSignupFormVisibility] = React.useState(false);
@@ -14,6 +16,7 @@ function UserPanel() {
 
     const userLogoutHandler = () => {
         context.onLogout();
+        navigate('/');
     };
 
     const showSignupFormHandler = () => {
@@ -30,6 +33,7 @@ function UserPanel() {
 
     const hideLoginFormHandler = () => {
         setLoginFormVisibility(false);
+        navigate('/profile');
     };
 
     if (context.isAuthorized) {

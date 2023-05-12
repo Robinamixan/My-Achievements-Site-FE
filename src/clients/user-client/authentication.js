@@ -60,7 +60,7 @@ export async function login(loginData) {
         const token = responseData.token;
 
         if (!userId || !token) {
-            logger.log('Authentication failed');
+            throw new Error('Authentication failed');
         }
 
         return {

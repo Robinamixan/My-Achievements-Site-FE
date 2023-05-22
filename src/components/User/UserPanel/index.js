@@ -1,10 +1,10 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './UserPanel.module.css';
-import SignupForm from '../SignupForm/SignupForm';
-import LoginForm from '../LoginForm/LoginForm';
-import Button from '../../UI/Button/Button';
+import SignupForm from '../SignupForm';
+import LoginForm from '../LoginForm';
+import Button from '../../UI/Button';
 import AuthContext from '../../../store/auth-context';
 
 function UserPanel() {
@@ -54,8 +54,8 @@ function UserPanel() {
             <div className={styles.item}>
                 <Button className={styles.button} onClick={showSignupFormHandler}>Sign-up</Button>
             </div>
-            <SignupForm isVisible={isSignupFormVisible} onClose={hideSignupFormHandler}/>
-            <LoginForm isVisible={isLoginFormVisible} onClose={hideLoginFormHandler}/>
+            <SignupForm isVisible={isSignupFormVisible} onClose={hideSignupFormHandler} />
+            <LoginForm isVisible={isLoginFormVisible} onClose={hideLoginFormHandler} />
         </div>
     );
 }

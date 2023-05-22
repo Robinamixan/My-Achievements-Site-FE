@@ -12,7 +12,7 @@ const AuthContext = React.createContext({
     },
 });
 
-export function AuthContextProvider(props) {
+export function AuthContextProvider({ children }) {
     const [isAuthorized, setIsAuthorized] = React.useState(userManager.isAuthorized);
 
     React.useEffect(() => {
@@ -39,7 +39,7 @@ export function AuthContextProvider(props) {
             onLogout: logoutHandler,
             onLogin: loginHandler,
         }}>
-            {props.children}
+            {children}
         </AuthContext.Provider>
     );
 }

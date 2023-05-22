@@ -1,31 +1,31 @@
 import React from 'react';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './App.css';
 
-import BaseLayout from './pages/BaseLayout/BaseLayout';
-import Homepage from './pages/Homepage/Homepage';
-import UserProfile from './pages/UserProfile/UserProfile';
-import Error from './pages/Error/Error';
-import UsersList from './pages/UsersList/UsersList';
+import BaseLayout from './pages/BaseLayout';
+import Homepage from './pages/Homepage';
+import UserProfile from './pages/UserProfile';
+import Error from './pages/Error';
+import UsersList from './pages/UsersList';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <BaseLayout/>,
+        element: <BaseLayout />,
         errorElement: <Error />,
         children: [
             {
                 index: true,
-                element: <Homepage/>,
+                element: <Homepage />,
             },
             {
                 path: 'profile',
-                element: <UserProfile/>,
+                element: <UserProfile />,
             },
             {
                 path: 'users',
-                element: <UsersList/>
+                element: <UsersList />
             }
         ]
     }
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <div className={'app'}>
+        <div className="app">
             <RouterProvider router={router} />
         </div>
     );

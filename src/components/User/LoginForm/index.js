@@ -3,28 +3,34 @@ import PropTypes from 'prop-types';
 
 import * as authenticationClient from '../../../clients/user-client/authentication';
 
-import Popup from '../../UI/Popup/Popup';
-import Button from '../../UI/Button/Button';
+import Popup from '../../UI/Popup';
+import Button from '../../UI/Button';
 import styleClasses from './LoginForm.module.css';
 import AuthContext from '../../../store/auth-context';
-import Input from '../../UI/Input/Input';
+import Input from '../../UI/Input';
+import ValidationMessage from '../../UI/ValidationMessage';
+
+const REQUIRED_PASSWORD_LENGTH = 5;
+const INITIAL_STATE = {
+    email: '',
+    password: '',
+    isValidEmail: true,
+    isValidPassword: true,
+};
 
 LoginForm.propTypes = {
     isVisible: PropTypes.bool,
     onClose: PropTypes.func
 };
 
-function LoginForm(props) {
+function LoginForm({ isVisible, onClose }) {
     const context = React.useContext(AuthContext);
-
-    const initialState = {
-        email: '',
-        password: '',
-        isValidEmail: true,
-        isValidPassword: true,
-    };
-    const [formValues, setFormValues] = React.useState(initialState);
+    const [formValues, setFormValues] = React.useState(INITIAL_STATE);
     const [validationMessage, setValidationMessage] = React.useState('');
+
+    if (!isVisible) {
+        return;
+    }
 
     const inputChangeHandler = (event) => {
         let fieldName;
@@ -50,17 +56,17 @@ function LoginForm(props) {
     const loginHandler = async (event) => {
         event.preventDefault();
 
-        if (formValues.email.length === 0 || formValues.password.length === 0) {
+        if (!formValues.email || !formValues.password) {
             setValidationMessage('Please enter valid email and password.');
             setFormValues({
                 ...formValues,
-                isValidPassword: formValues.password.length !== 0,
-                isValidEmail: formValues.email.length !== 0,
+                isValidPassword: !!formValues.password,
+                isValidEmail: !!formValues.email,
             });
             return;
         }
 
-        if (formValues.password.length < 5) {
+        if (formValues.password.length < REQUIRED_PASSWORD_LENGTH) {
             setValidationMessage('Please enter valid password. It should be at least 5 characters long');
             setFormValues({
                 ...formValues,
@@ -86,38 +92,35 @@ function LoginForm(props) {
             return;
         }
 
-        setFormValues(initialState);
-        props.onClose();
+        setFormValues(INITIAL_STATE);
+        onClose();
     };
 
-    if (!props.isVisible) {
-        return;
-    }
-
     return (
-        <Popup className={styleClasses['login-form']} onBackdropClick={props.onClose}>
+        <Popup className={styleClasses['login-form']} onBackdropClick={onClose}>
             <h2>Login</h2>
             <form onSubmit={loginHandler}>
-                {(!formValues.isValidEmail || !formValues.isValidPassword) && <div className={styleClasses['validation-message']}>
-                    {validationMessage}
-                </div>}
+                <ValidationMessage
+                    isVisible={!formValues.isValidEmail || !formValues.isValidPassword}
+                    message={validationMessage}
+                />
                 <Input
-                    id={'login-email'}
-                    type={'email'}
-                    label={'Email'}
+                    id="login-email"
+                    type="email"
+                    label="Email"
                     value={formValues.email}
                     onChange={inputChangeHandler}
                     isValid={formValues.isValidEmail}
                 />
                 <Input
-                    id={'login-password'}
-                    type={'password'}
-                    label={'Password'}
+                    id="login-password"
+                    type="password"
+                    label="Password"
                     value={formValues.password}
                     onChange={inputChangeHandler}
                     isValid={formValues.isValidPassword}
                 />
-                <Button type={'submit'}>Login</Button>
+                <Button type="submit">Login</Button>
             </form>
         </Popup>
     );

@@ -5,19 +5,26 @@ import * as logger from '../../services/logger';
 
 import AuthContext from '../../store/auth-context';
 
+const INITIAL_STATE = [];
+
 function UsersList() {
     const context = React.useContext(AuthContext);
     const isAuthorized = context.isAuthorized;
 
-    const [users, setUsers] = React.useState([]);
+    const [users, setUsers] = React.useState(INITIAL_STATE);
 
     React.useEffect(() => {
         if (!isAuthorized) {
-            setUsers([]);
+            setUsers(INITIAL_STATE);
+        }
+    }, [isAuthorized]);
+
+    React.useEffect(() => {
+        if (!isAuthorized) {
             return;
         }
 
-        const pagination = {page: 1};
+        const pagination = { page: 1 };
         userClient.getUsers(pagination)
             .then((userList) => {
                 setUsers(userList.items);
@@ -31,11 +38,9 @@ function UsersList() {
             <div>
                 <ul>
                     {
-                        users.map(user => {
-                            return (
-                                <li key={user.id}>{user.name} {user.email}</li>
-                            );
-                        })
+                        users.map(user => (
+                            <li key={user.id}>{user.name} {user.email}</li>
+                        ))
                     }
                 </ul>
             </div>

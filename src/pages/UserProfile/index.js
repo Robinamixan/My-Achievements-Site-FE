@@ -5,34 +5,28 @@ import * as logger from '../../services/logger';
 
 import AuthContext from '../../store/auth-context';
 
+const INITIAL_STATE = {
+    username: '',
+    email: '',
+    roles: [],
+    active: null,
+};
+
 function UserProfile() {
     const context = React.useContext(AuthContext);
     const isAuthorized = context.isAuthorized;
     const userId = context.userId;
 
-    const [userState, setUserState] = React.useState({
-        username: '',
-        email: '',
-        roles: [],
-        active: null,
-    });
+    const [userState, setUserState] = React.useState(INITIAL_STATE);
 
     React.useEffect(() => {
         if (!isAuthorized) {
-            setUserState({
-                username: '',
-                email: '',
-                roles: [],
-                active: null,
-            });
-            return;
+            setUserState(INITIAL_STATE);
         }
+    }, [isAuthorized]);
 
-        const requestData = {
-            userId: userId
-        };
-
-        userClient.getUserDetails(requestData)
+    React.useEffect(() => {
+        userClient.getUserDetails({ userId })
             .then((response) => {
                 setUserState({
                     username: response.name,
@@ -42,7 +36,7 @@ function UserProfile() {
                 });
             })
             .catch((error) => logger.log(error));
-    }, [isAuthorized, userId]);
+    }, [userId]);
 
     return (
         <>

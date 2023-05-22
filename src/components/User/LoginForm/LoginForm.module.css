@@ -15,8 +15,3 @@
 .login-form form{
     padding: 1rem;
 }
-
-.validation-message {
-    border: 1px solid red;
-    background: #fbdada;
-}

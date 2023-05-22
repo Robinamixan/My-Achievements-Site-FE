@@ -9,8 +9,7 @@ Popup.propTypes = {
     onBackdropClick: PropTypes.func,
 };
 
-function Popup(props) {
-    const {className, onBackdropClick, children, ...childProps} = props;
+function Popup({ className, onBackdropClick, children, ...childProps }) {
     const classes = className + ' ' + styleClasses['popup-box'];
 
     return (

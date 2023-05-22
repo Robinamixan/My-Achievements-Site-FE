@@ -1,8 +1,8 @@
 import * as logger from '../../services/logger';
 import * as userDataManager from '../../services/user-manager';
+import { STATUS_OK } from '../../constants/response-statuses';
 
-export async function getUsers(requestData) {
-    const page = requestData.page || 1;
+export async function getUsers({ page }) {
     const url = `${process.env.REACT_APP_BE_HOST}/api/v1/users?page=${page}`;
 
     try {
@@ -15,7 +15,7 @@ export async function getUsers(requestData) {
         });
 
         const responseData = await response.json();
-        if (response.status !== 200) {
+        if (response.status !== STATUS_OK) {
             logger.log(responseData);
         }
 
@@ -26,8 +26,8 @@ export async function getUsers(requestData) {
     }
 }
 
-export async function getUserDetails(requestData) {
-    const url = process.env.REACT_APP_BE_HOST + '/api/v1/users/' + requestData.userId;
+export async function getUserDetails({ userId }) {
+    const url = `${process.env.REACT_APP_BE_HOST}/api/v1/users/${userId}`;
 
     try {
         const response = await fetch(url, {
@@ -39,7 +39,7 @@ export async function getUserDetails(requestData) {
         });
 
         const responseData = await response.json();
-        if (response.status !== 200) {
+        if (response.status !== STATUS_OK) {
             logger.log(responseData);
         }
 
@@ -50,14 +50,9 @@ export async function getUserDetails(requestData) {
     }
 }
 
-export async function updateUser(requestData) {
-    const url = process.env.REACT_APP_BE_HOST + '/api/v1/users/' + requestData.userId;
-    const body = {
-        name: requestData.name,
-        email: requestData.email,
-        roles: requestData.roles,
-        active: requestData.active
-    };
+export async function updateUser({ name, email, roles, active, userId }) {
+    const url = `${process.env.REACT_APP_BE_HOST}/api/v1/users/${userId}`;
+    const body = { name, email, roles, active };
 
     try {
         const response = await fetch(url, {
@@ -70,7 +65,7 @@ export async function updateUser(requestData) {
         });
 
         const responseData = await response.json();
-        if (response.status !== 200) {
+        if (response.status !== STATUS_OK) {
             logger.log(responseData);
         }
 
@@ -81,8 +76,8 @@ export async function updateUser(requestData) {
     }
 }
 
-export async function deleteUser(requestData) {
-    const url = process.env.REACT_APP_BE_HOST + '/api/v1/users/' + requestData.userId;
+export async function deleteUser({ userId }) {
+    const url = `${process.env.REACT_APP_BE_HOST}/api/v1/users/${userId}`;
 
     try {
         const response = await fetch(url, {
@@ -94,7 +89,7 @@ export async function deleteUser(requestData) {
         });
 
         const responseData = await response.json();
-        if (response.status !== 200) {
+        if (response.status !== STATUS_OK) {
             logger.log(responseData);
         }
 

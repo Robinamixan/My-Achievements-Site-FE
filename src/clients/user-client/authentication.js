@@ -1,12 +1,9 @@
 import * as logger from '../../services/logger';
+import { STATUS_OK } from '../../constants/response-statuses';
 
-export async function signUp(signUpData) {
-    const url = process.env.REACT_APP_BE_HOST + '/api/v1/sign-up';
-    const body = {
-        email: signUpData.email,
-        password: signUpData.password,
-        name: signUpData.name
-    };
+export async function signUp({ email, password, name }) {
+    const url = `${process.env.REACT_APP_BE_HOST}/api/v1/sign-up`;
+    const body = { email, password, name };
 
     try {
         const response = await fetch(url, {
@@ -18,7 +15,7 @@ export async function signUp(signUpData) {
         });
 
         const responseData = await response.json();
-        if (response.status !== 200) {
+        if (response.status !== STATUS_OK) {
             logger.log(responseData);
         }
 
@@ -27,20 +24,15 @@ export async function signUp(signUpData) {
         if (!userId) {
             logger.log('User was not created');
         }
-
-        return true;
     } catch (error) {
         logger.log(error);
         throw error;
     }
 }
 
-export async function login(loginData) {
-    const url = process.env.REACT_APP_BE_HOST + '/api/v1/login';
-    const body = {
-        email: loginData.email,
-        password: loginData.password,
-    };
+export async function login({ email, password }) {
+    const url = `${process.env.REACT_APP_BE_HOST}/api/v1/login`;
+    const body = { email, password };
 
     try {
         const response = await fetch(url, {
@@ -52,7 +44,7 @@ export async function login(loginData) {
         });
 
         const responseData = await response.json();
-        if (response.status !== 200) {
+        if (response.status !== STATUS_OK) {
             logger.log(responseData);
         }
 

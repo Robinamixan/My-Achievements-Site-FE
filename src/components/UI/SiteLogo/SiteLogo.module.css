@@ -1,0 +1,16 @@
+.site-logo {
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+.wrapper {
+    width: 5rem;
+    height: 5rem;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

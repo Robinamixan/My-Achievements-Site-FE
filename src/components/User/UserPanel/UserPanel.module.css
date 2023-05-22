@@ -1,0 +1,24 @@
+.user-panel {
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.item .button{
+    padding: 0.5rem 1rem;
+    background-color: #4fa0ce;
+    border-color: #4fa0ce;
+}
+
+.item .button:hover,
+.item .button:active {
+    background: #5bbbf1;
+    border-color: #5bbbf1;
+}

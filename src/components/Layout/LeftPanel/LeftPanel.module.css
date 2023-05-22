@@ -1,0 +1,8 @@
+.left-panel {
+    background-color: #4fa0ce;
+    color: white;
+    width: 20rem;
+    border: 2px solid #017394;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}

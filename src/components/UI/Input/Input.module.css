@@ -1,0 +1,37 @@
+.form-input {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 0.5rem 0;
+}
+
+.form-input label{
+    flex: 1 1;
+    text-align: left;
+}
+
+.form-input input {
+    flex: 3 1;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 0.35rem 0.35rem;
+}
+
+.form-input.invalid input {
+    border-color: red;
+    background: #fbdada;
+}
+
+.form-input input:focus {
+    outline: none;
+    border-color: #5d5d5d;
+    background: #f6dbfc;
+}
+
+@media (min-width: 768px) {
+    .form-input{
+        align-items: center;
+        flex-direction: row;
+    }
+}

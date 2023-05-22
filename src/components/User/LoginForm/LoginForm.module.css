@@ -1,0 +1,17 @@
+.login-form {
+    top: 15vh;
+    background-color: white;
+    color: black;
+}
+
+.login-form h2 {
+    text-align: left;
+    background-color: #034d67;
+    color: white;
+    margin: 0;
+    padding: 1rem;
+}
+
+.login-form form{
+    padding: 1rem;
+}

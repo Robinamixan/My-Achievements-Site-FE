@@ -10,7 +10,7 @@ Popup.propTypes = {
 };
 
 function Popup({ className, onBackdropClick, children, ...childProps }) {
-    const classes = className + ' ' + styleClasses['popup-box'];
+    const classes = `${className} ${styleClasses['popup-box']}`;
 
     return (
         <React.Fragment>

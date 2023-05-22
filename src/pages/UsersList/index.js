@@ -24,8 +24,7 @@ function UsersList() {
             return;
         }
 
-        const pagination = { page: 1 };
-        userClient.getUsers(pagination)
+        userClient.getUsers({ page: 1 })
             .then((userList) => {
                 setUsers(userList.items);
             })

@@ -26,6 +26,10 @@ function UserProfile() {
     }, [isAuthorized]);
 
     React.useEffect(() => {
+        if (!isAuthorized) {
+            return;
+        }
+
         userClient.getUserDetails({ userId })
             .then((response) => {
                 setUserState({
@@ -36,7 +40,7 @@ function UserProfile() {
                 });
             })
             .catch((error) => logger.log(error));
-    }, [userId]);
+    }, [userId, isAuthorized]);
 
     return (
         <>

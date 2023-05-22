@@ -10,7 +10,7 @@ export async function getUsers({ page }) {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + userDataManager.getUserToken()
+                'Authorization': `Bearer ${userDataManager.getUserToken()}`,
             }
         });
 
@@ -34,7 +34,7 @@ export async function getUserDetails({ userId }) {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + userDataManager.getUserToken()
+                'Authorization': `Bearer ${userDataManager.getUserToken()}`,
             }
         });
 
@@ -60,7 +60,7 @@ export async function updateUser({ name, email, roles, active, userId }) {
             body: JSON.stringify(body),
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + userDataManager.getUserToken()
+                'Authorization': `Bearer ${userDataManager.getUserToken()}`,
             }
         });
 
@@ -84,7 +84,7 @@ export async function deleteUser({ userId }) {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + userDataManager.getUserToken()
+                'Authorization': `Bearer ${userDataManager.getUserToken()}`,
             }
         });
 

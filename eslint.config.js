@@ -19,7 +19,15 @@ module.exports = [
             'no-unused-vars': 'error',
             'no-multiple-empty-lines': ['error', { 'max': 1 }],
             'no-magic-numbers': ['error', { 'ignore': [1] }],
+            'no-mixed-spaces-and-tabs': 'error',
             'react/jsx-tag-spacing': 2,
+            'react/function-component-definition': [
+                'error',
+                {
+                    namedComponents: 'function-declaration',
+                    unnamedComponents: 'function-expression',
+                },
+            ],
         }
     }
 ];
